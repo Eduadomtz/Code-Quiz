@@ -1,18 +1,18 @@
-var time = document.querySelector(".countdown");
+var countdown = document.querySelector(".countdown");
 var startQuizz = document.querySelector(".startQuizz");
 var highScores = document.querySelector(".score");
 var theQuestions = document.querySelector(".questions");
-var answers = document.querySelector("answerButtons");
-var ulList = document.querySelectorAll("ul");
-var currentQuestion = 0;
-var timeLeft = 0;
+var theAnswers = document.querySelector(".answers");
 
+var timeLeft = 10;
 var score = 0;
+var currentQuestion = -1;
+var mistakes= 5;
+var correct;
 
-var pollIndex = 0;
 var poll = [
     {
-    question: "Who led the first expedition around the Cape of Good Hope?",
+    question: "Led the first expedition around the Cape of Good Hope?",
     options: ["Americo Vespucci", "Pedro Álvares Cabral", "Christopher Columbus", "Bartolomeu Dias"],
     answer: "Bartolomeu Dias"
 },{
@@ -33,34 +33,43 @@ var poll = [
 startQuizz.addEventListener('click', startGame)
 
 function startGame (){
-    timeLeft = 5;
+  
     var timeInterval = setInterval(function () {
         timeLeft--;
-        document.getElementById("timeLeft").innerHTML = timeLeft;
+        countdown.innerHTML = timeLeft;
         if (timeLeft === 0 || currentQuestion === poll.length) {
             clearInterval(timeInterval);
             gameOver () 
         }
     },1000);
-    nextQuestion ();
+    questions();
     startQuizz.style.display = 'none';
 }
 
+function questions (){
+    currentQuestion++;
+
+    theQuestions.innerHTML = poll[currentQuestion].question;
+    correct = poll[currentQuestion].answer
+    theAnswers.innerHTML = "";
 
 
-function nextQuestion () {
-    appearQuestion(poll[currentQuestion]);
-        
+    var choices = poll[currentQuestion].options;
+
+    for (var i = 0; i < choices.length; i++) {
+        var next = document.createElement("button");
+
+        next.innerHTML = choices[i]
+        answerBtn = theAnswers.append(next);
+    }
 }
 
-function appearQuestion (question){
-    theQuestions.innerText = question.question;
-}
 
-function answerSelection (){
-    
-}
 
+function answers () {
+   
+}
+   
 
 function gameOver (timeInterval) {
     clearInterval(timeInterval);
@@ -72,3 +81,4 @@ function gameOver (timeInterval) {
     `
     document.querySelector(".quizz").innerHTML = displayMessage;
 }
+
