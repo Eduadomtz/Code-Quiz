@@ -3,8 +3,9 @@ var startQuizz = document.querySelector(".startQuizz");
 var highScores = document.querySelector(".score");
 var theQuestions = document.querySelector(".questions");
 var theAnswers = document.querySelector(".answers");
+var introduction = document.querySelector(".introduction");
 
-var timeLeft = 10;
+var timeLeft = 60;
 var score = 0;
 var currentQuestion = -1;
 var mistakes= 5;
@@ -44,6 +45,7 @@ function startGame (){
     },1000);
     questions();
     startQuizz.style.display = 'none';
+    introduction.style.display = 'none';
 }
 
 function questions (){

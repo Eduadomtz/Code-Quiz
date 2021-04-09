@@ -38,12 +38,6 @@ h1 {
     margin-top: 70px;
  }
 
- input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
- }
-
 .score {
     border: 3px solid var(--blue);
     width: 12%;
@@ -93,13 +87,28 @@ h1 {
 }
 
 .questions {
-    position: absolute;
-    top: 30px;
-    right: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
     font-size: 20px;
 }
 
 
+.answers {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 750px;
+    margin-top: 80px;
+}
+
+.introduction {
+    width: 90%;
+    position: absolute;
+    left: 50px;
+    top: 10px;
+}
 
 
 
