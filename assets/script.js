@@ -4,11 +4,12 @@ var highScores = document.querySelector(".score");
 var theQuestions = document.querySelector(".questions");
 var theAnswers = document.querySelector(".answers");
 var introduction = document.querySelector(".introduction");
+var message = document.querySelector(".message");
 
 var timeLeft = 60;
 var score = 0;
 var currentQuestion = -1;
-var mistakes= 5;
+var mistakes= 10;
 var correct;
 
 var poll = [
@@ -65,13 +66,20 @@ function questions (){
         answerBtn = theAnswers.append(next);
     }
 }
+ 
+theAnswers.addEventListener('click', function (event) {
+    var element = event.target;
 
+        if (element.textContent == poll[currentQuestion].answer) {
+            score++;
+            message.textContent = "Correct! The answer is:  " + poll[currentQuestion].answer;
+        } else {
+            timeLeft = timeLeft - mistakes;
+            message.textContent = "Wrong! The correct answer is:  " + poll[currentQuestion].answer;
+        }
 
-
-function answers () {
-   
-}
-   
+    questions();
+});
 
 function gameOver (timeInterval) {
     clearInterval(timeInterval);
@@ -83,4 +91,3 @@ function gameOver (timeInterval) {
     `
     document.querySelector(".quizz").innerHTML = displayMessage;
 }
-
