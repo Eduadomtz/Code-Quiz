@@ -72,22 +72,37 @@ theAnswers.addEventListener('click', function (event) {
 
         if (element.textContent == poll[currentQuestion].answer) {
             score++;
-            message.textContent = "Correct! The answer is:  " + poll[currentQuestion].answer;
+            message.textContent = "Correct!";
         } else {
             timeLeft = timeLeft - mistakes;
             message.textContent = "Wrong! The correct answer is:  " + poll[currentQuestion].answer;
         }
-
-    questions();
+        questions();
 });
+
+function setScore() {
+    localStorage.setItem("highscore", score);
+    localStorage.setItem("name",document.getElementById('name').value);
+    displayScore ()
+}
+
+function displayScore () {
+    var userName = localStorage.getItem("name");
+    var count = localStorage.getItem("highscore");
+
+    highScores.textContent = userName + ": " + count;
+}
+
 
 function gameOver (timeInterval) {
     clearInterval(timeInterval);
     var displayMessage = `
         <h3>Game over</h3>
-        <p>Your score:</p>
+        <p>Your score: ` + score +  ` </p>
         <input type="text" id="name" placeholder="First name"> 
         <button onclick="setScore()" class= "buttonScore">Set score!</button>
     `
     document.querySelector(".quizz").innerHTML = displayMessage;
 }
+
+
