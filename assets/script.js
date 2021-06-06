@@ -5,6 +5,8 @@ var theQuestions = document.querySelector(".questions");
 var theAnswers = document.querySelector(".answers");
 var introduction = document.querySelector(".introduction");
 var message = document.querySelector(".message");
+var quizDisplay = document.querySelector(".quizz");
+var scoreDisplay = document.querySelector(".displayScore");
 
 var timeLeft = 60;
 var score = 0;
@@ -80,18 +82,6 @@ theAnswers.addEventListener('click', function (event) {
         questions();
 });
 
-function setScore() {
-    localStorage.setItem("highscore", score);
-    localStorage.setItem("name",document.getElementById('name').value);
-    displayScore ()
-}
-
-function displayScore () {
-    var userName = localStorage.getItem("name");
-    var count = localStorage.getItem("highscore");
-
-    highScores.textContent = userName + ": " + count;
-}
 
 
 function gameOver (timeInterval) {
@@ -102,7 +92,18 @@ function gameOver (timeInterval) {
         <input type="text" id="name" placeholder="First name"> 
         <button onclick="setScore()" class= "buttonScore">Set score!</button>
     `
-    document.querySelector(".quizz").innerHTML = displayMessage;
+    quizDisplay.innerHTML = displayMessage;
 }
 
+function setScore() {
+    localStorage.setItem("highscore", score);
+    localStorage.setItem("name",document.getElementById('name').value);
+    displayScore ()
+}
 
+function displayScore () {
+    var userName = localStorage.getItem("name");
+    var count = localStorage.getItem("highscore");
+
+    scoreDisplay.textContent = userName + ": " + count;
+}
